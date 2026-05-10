@@ -3,7 +3,10 @@
     "allow": [
       "PowerShell(Move-Item -Destination \"E:\\\\mywork\\\\1_work\\\\claudecoding\\\\2026\\\\steve\\\\hibiscus\\\\\" -Force)",
       "Bash(rm -f dev.log)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
