@@ -1,0 +1,125 @@
+---
+import Container from "./Container.astro";
+
+const { siteSettings } = Astro.props;
+const s = siteSettings ?? {};
+
+const brandName = s.brandName ?? "HIBISCUS EXECUTIVE SUITES";
+const logoUrl = s.logoUrl || "/images/Hibiscus-Official-Logo.webp";
+const addressLine1 = s.addressLine1 ?? "Hibiscus Executive Suites, LLC";
+const addressLine2 = s.addressLine2 ?? "2501 S. Tamiami Trail, Sarasota";
+const addressLine3 = s.addressLine3 ?? "FL 34236";
+const phone = s.phone ?? "941.275.1998";
+const phoneLink = s.phoneLink || `tel:${phone.replace(/[^0-9+]/g, "")}`;
+const contactButtonUrl = s.contactButtonUrl ?? "#contact";
+
+const navLinks = [
+  { label: "SPACES", href: "#spaces" },
+  { label: "CONFERENCE & MEDIATION", href: "#conference" },
+  { label: "SERVICES", href: "#services" },
+  { label: "CALENDAR", href: "#calendar" },
+  { label: "CONTACT", href: "#contact" },
+];
+---
+
+<header class="relative isolate">
+
+  <!-- ROW 1: top utility bar -->
+  <div
+    class="relative bg-cover bg-center"
+    style="background-image: url('/images/Hibiscus-Header-Section-1.webp');"
+  >
+    <div class="absolute inset-0 bg-white/35 pointer-events-none"></div>
+
+    <Container class="relative z-10 py-2 min-h-[70px] grid grid-cols-1 md:grid-cols-[35%_65%] items-center gap-4">
+
+      <!-- LEFT: brand text -->
+      <div class="flex items-center justify-center md:justify-start">
+        <span class="font-['Open_Sans'] text-[#2A2A2A] uppercase font-light tracking-normal text-[24px] md:text-[30px] lg:text-[35px] leading-[1.23]">
+          {brandName}
+        </span>
+      </div>
+
+      <!-- RIGHT: address | phone | contact button — single horizontal row -->
+      <div class="flex items-center justify-center md:justify-end gap-4 md:gap-5 flex-wrap">
+
+        <!-- Address (2 lines, single <p> with <br>) -->
+        <p class="font-['Open_Sans'] text-[13px] leading-[15px] font-bold tracking-[-0.25px] text-right text-[#038574] m-0">
+          {addressLine1}<br />{addressLine2}
+        </p>
+
+        <!-- Vertical separator -->
+        <div class="w-px h-10 bg-[#888]" aria-hidden="true"></div>
+
+        <!-- Phone -->
+        <a
+          href={s.phoneLink || 'tel:+19412751998'}
+          class="font-['Open_Sans'] text-[#2D8B4F] font-semibold text-[28px] leading-[34px] tracking-normal hover:opacity-80 transition-opacity"
+        >
+          {phone}
+        </a>
+
+        <!-- Contact button image -->
+        <a
+          href={contactButtonUrl}
+          class="block hover:opacity-90 transition-opacity"
+          aria-label="Contact"
+        >
+          <img
+            src="/images/Contact-Hibiscus-Btn.webp"
+            alt="Contact"
+            class="h-[36px] w-auto"
+            loading="eager"
+          />
+        </a>
+      </div>
+    </Container>
+  </div>
+
+  <!-- ROW 2: hero strip with the logo -->
+  <div
+    class="relative h-[280px] bg-cover bg-center overflow-visible"
+    style="background-image: url('/images/Hibiscus-Header-Section-2.webp');"
+  >
+    <Container class="relative h-full">
+      <img
+        src={logoUrl}
+        alt={brandName}
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-[calc(-50%-12px)] w-[400px] h-[400px] object-contain z-30 [filter:drop-shadow(0_8px_24px_rgba(0,0,0,0.15))]"
+        loading="eager"
+      />
+    </Container>
+  </div>
+
+  <!-- ROW 3: navigation strip -->
+  <div
+    class="relative bg-cover bg-center"
+    style="background-image: url('/images/Hibiscus-Header-Section-3.webp');"
+  >
+    <div class="absolute inset-0 bg-white/25 pointer-events-none"></div>
+
+    <nav>
+      <Container class="relative z-10 h-[70px] flex items-stretch justify-between gap-4">
+        {navLinks.map((link, i) => (
+          <Fragment>
+            <a
+              href={link.href}
+              class="flex items-center font-['Open_Sans'] text-[#038574] uppercase text-[20px] md:text-[26px] lg:text-[30px] leading-[1.25] font-bold tracking-normal hover:opacity-75 transition-opacity whitespace-nowrap"
+            >
+              {link.label}
+            </a>
+            {i < navLinks.length - 1 && (
+              <img
+                src="/images/Nav-Seperator.webp"
+                alt=""
+                aria-hidden="true"
+                class="h-full w-[5px] shrink-0"
+              />
+            )}
+          </Fragment>
+        ))}
+      </Container>
+    </nav>
+  </div>
+
+</header>

@@ -1,0 +1,50 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { fetchAPI } from "../lib/wp.js";
+import { GET_SITE_SETTINGS } from "../lib/queries.js";
+
+const { title = "Hibiscus Executive Suites" } = Astro.props;
+
+let siteSettings = null;
+try {
+  const data = await fetchAPI(GET_SITE_SETTINGS);
+  siteSettings = data?.pages?.nodes?.[0]?.siteSettings ?? null;
+} catch (err) {
+  console.error("[Layout] Failed to fetch site settings:", err.message);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+    <style is:global>
+      :root {
+        --font-sans: "Inter", "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      html, body {
+        font-family: var(--font-sans);
+        background-color: #FAF8F4;
+        color: #2A2A2A;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header siteSettings={siteSettings} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer siteSettings={siteSettings} />
+  </body>
+</html>
