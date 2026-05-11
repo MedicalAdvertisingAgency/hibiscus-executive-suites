@@ -6,19 +6,35 @@ const query = `
     pages(where: { name: "home" }) {
       nodes {
         homeSection1 {
-          card1Icon
+          card1Icon {
+            nodes {
+              sourceUrl
+            }
+          }
           card1Heading
           card1Content
           card1Link
-          card2Icon
+          card2Icon {
+            nodes {
+              sourceUrl
+            }
+          }
           card2Heading
           card2Content
           card2Link
-          card3Icon
+          card3Icon {
+            nodes {
+              sourceUrl
+            }
+          }
           card3Heading
           card3Content
           card3Link
-          card4Icon
+          card4Icon {
+            nodes {
+              sourceUrl
+            }
+          }
           card4Heading
           card4Content
           card4Link
@@ -40,25 +56,25 @@ try {
 
 const cards = [
   {
-    icon: section1?.card1Icon || '/images/Get-a-Quote.webp',
+    icon: section1?.card1Icon?.nodes?.[0]?.sourceUrl || '/images/Get-a-Quote.webp',
     heading: section1?.card1Heading || 'Get a quote',
     content: section1?.card1Content || 'Receive personalized pricing and workspace solutions aligned perfectly to your business requirements.',
     link: section1?.card1Link || '/get-a-quote',
   },
   {
-    icon: section1?.card2Icon || '/images/Book-a-meeting-room.webp',
+    icon: section1?.card2Icon?.nodes?.[0]?.sourceUrl || '/images/Book-a-meeting-room.webp',
     heading: section1?.card2Heading || 'Book a meeting room',
     content: section1?.card2Content || 'Reserve fully equipped meeting rooms ideal for presentations, client meetings, or team collaborations.',
     link: section1?.card2Link || '/book-a-meeting-room',
   },
   {
-    icon: section1?.card3Icon || '/images/Book-a-center-tour.webp',
+    icon: section1?.card3Icon?.nodes?.[0]?.sourceUrl || '/images/Book-a-center-tour.webp',
     heading: section1?.card3Heading || 'Book a center tour',
     content: section1?.card3Content || 'Schedule a guided visit and experience our workspace facilities firsthand.',
     link: section1?.card3Link || '/book-a-center-tour',
   },
   {
-    icon: section1?.card4Icon || '/images/Buy-a-virtual-office.webp',
+    icon: section1?.card4Icon?.nodes?.[0]?.sourceUrl || '/images/Buy-a-virtual-office.webp',
     heading: section1?.card4Heading || 'Buy a virtual office',
     content: section1?.card4Content || 'Establish a prestigious business address with professional mail and call-handling services.',
     link: section1?.card4Link || '/buy-a-virtual-office',
