@@ -1,4 +1,4 @@
-const endpoint = import.meta.env.WP_GRAPHQL_URL;
+const endpoint = import.meta.env.WP_GRAPHQL_URL || process.env.WP_GRAPHQL_URL;
 
 export async function fetchAPI(query, variables = {}) {
   if (!endpoint) {
