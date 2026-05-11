@@ -2,7 +2,7 @@ const endpoint = import.meta.env.PUBLIC_WP_GRAPHQL_URL;
 
 export async function fetchAPI(query, variables = {}) {
   if (!endpoint) {
-    throw new Error("WP_GRAPHQL_URL is not set. Add it to .env");
+    throw new Error("PUBLIC_WP_GRAPHQL_URL is not set. Add it to .env");
   }
 
   const res = await fetch(endpoint, {
