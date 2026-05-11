@@ -30,10 +30,12 @@ const query = `
 
 let section1 = null;
 try {
+  console.log('GraphQL URL:', import.meta.env.PUBLIC_WP_GRAPHQL_URL);
   const data = await fetchAPI(query);
   section1 = data?.pages?.nodes?.[0]?.homeSection1;
+  console.log('Section1 data:', JSON.stringify(section1));
 } catch (e) {
-  console.warn('Section1: WordPress data unavailable, using fallbacks');
+  console.warn('Section1 fetch failed:', e.message);
 }
 
 const cards = [
